@@ -4,6 +4,9 @@ function App() {
   const [mode, setMode] = useState<'easy' | 'hard' | null>(null);
   const [elapsedTime, setElapsedTime] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
+
+  // Create new state to capture last key pressed, for future use in game logic (e.g. showing which key was pressed, or validating input)
+  const [lastKey, setLastKey] = useState<string>('');
   
   // Timer logic - runs only in game mode
   useEffect(() => {
@@ -34,6 +37,33 @@ const handleBackToMenu = () => {
   setMode(null);
   resetTimer();
 };
+
+useEffect(() => {
+  const handleKeyDown = (e: KeyboardEvent) => {
+    // Prevent scrolling on space, arrow keys, etc. when in game mode
+    if ([' ', 'Arrowup', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key) && mode !== null) {
+      e.preventDefault();
+    }
+    setLastKey(e.key);
+
+    // Later: we'll check if the key matches expected vim command
+    console.log('Keypressed:', e.key, 'with modifiers', {
+      ctrl: e.ctrlKey,
+      alt: e.altKey,
+      shift: e.shiftKey,
+    });
+  };
+
+  if (mode !== null) {
+    window.addEventListener('keydown', handleKeyDown);
+  }
+
+  // Cleanup: remove event listener
+  return () => {
+    window.removeEventListener('keydown', handleKeyDown);
+  };
+}, [mode]); // only depends on mode - we only want to listen for keypresses when in game mode
+
 
 return (
   <div 
@@ -115,6 +145,13 @@ return (
           </button>
         </>
       )}
+      <div style={{ marginTop: '2rem', fontSize: '1.6rem' }}>
+        Last key pressed: <strong style={{ color: '#ff9800'}}>{lastKey || '(none)'}</strong>
+      </div>
+
+      <p style={{ fontSize: '1.1rem', color: '#aaa', marginTop: '1rem' }}>
+        Try pressing h j k l, i, Esc, etc...
+      </p>
     </div>
   );
 }

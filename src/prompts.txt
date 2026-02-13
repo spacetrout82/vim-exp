@@ -1,0 +1,16 @@
+Okay, we are off to a good start. I have some non-negotiables regarding the way this game should function.
+The points amount, timer, and difficulty setting will end up influenceing the final score
+
+I am imagining a rapid fire kind of situation, where each exersize will be timed, as well as aN OVERALL timer.
+
+also there should be an error allowence, and this will be controlled by the easy/hard mode.
+Hard Mode will have no wiggle room, where as easy mode has 3 chances (think missing the key)
+I also want to keep track of the current streak of correct answers, the higher the streak mean there could be 
+a points multiplier.
+
+I also want to lean on the use of color for this game, Red = bad Green = Good, as the player types I want 
+some verbose buffer-like text to appear as they execute commands. 
+
+Imagine a vertical scrolling column, like a wheel, as each exersize completes, it moves up one, and the next exersize 
+slides up into the center position, and so on.
+

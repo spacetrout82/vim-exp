@@ -22,7 +22,7 @@ function App() {
         setElapsedTime((prev) => prev + 0.1);
       }, 100); // update every 100ms for smoth-ish 1 decimal place
     }
-    // Cleanup: Stop timer when mode changes or component unmounts, or dependency changes
+    // Cleanup: Stop timer when mode change or component unmounts, or dependency changes
     return () => {
       if (interval) clearInterval(interval);
     };

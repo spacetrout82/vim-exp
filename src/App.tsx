@@ -29,7 +29,7 @@ function App() {
   );
 }
 
-// Mode selected, show game
+// Mode selected, show game, lets do this
 return (
   <div style={{ textAlign: 'center', padding: '50px', fontFamily: 'monospace' }}>
     <h1>Training - {mode.toUpperCase()} mode</h1>

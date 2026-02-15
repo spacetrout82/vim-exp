@@ -30,7 +30,7 @@ export const vimCommands: VimCommand[] = [
 
   // Insert mode keys (you’ll be in insert when these appear)
   { id: 'C-h', mode: 'insert', keystroke: '<C-h>', description: 'Delete char before cursor (Ctrl+h)', points: 2 },
-  { id: 'C-w', mode: 'insert', keystroke: '<C-w>', description: 'Delete word before cursor', points: 4 },
+  { id: 'C-BS', mode: 'insert', keystroke: '<C-BS>', description: 'Delete word before cursor', points: 4 },
   { id: 'C-u', mode: 'insert', keystroke: '<C-u>', description: 'Delete to start of line', points: 5 },
 
   // More to come later…

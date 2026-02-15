@@ -234,11 +234,32 @@ function App() {
               </div>
             )}
 
-            {exercises.slice(currentIndex + 1).slice(0, 6).map((ex, i) => (
-              <div key={i} style={{ padding: '12px', opacity: 0.5, textAlign: 'left' }}>
-                {ex.description} <span style={{ fontSize: '0.9rem' }}>({ex.keystroke})</span>
-              </div>
-            ))}
+            {(() => {
+            const upcoming = exercises.slice(currentIndex + 1).slice(0, 6); // max 6 ahead
+            return upcoming.map((ex, relativeIndex) => {
+              // relativeIndex = 0 → immediate next (biggest)
+              // relativeIndex = 1 → a bit smaller
+              // ...
+              const scale = 1 - relativeIndex * 0.12;          // 1.0 → 0.88 → 0.76 → ...
+              const opacity = 0.9 - relativeIndex * 0.12;      // 0.9 → 0.78 → 0.66 → ...
+
+              return (
+                <div
+                  key={relativeIndex}
+                  style={{
+                    padding: '12px 0',
+                    opacity,
+                    fontSize: `${1.1 * scale}rem`,               // starts ~1.1rem, shrinks gradually
+                    textAlign: 'center',
+                    color: '#ccc',
+                    transition: 'all 0.4s ease',                 // smooth when new one enters
+                  }}
+                >
+                  {ex.description} <span style={{ fontSize: '0.85rem' }}>({ex.keystroke})</span>
+                </div>
+              );
+            });
+            })()}
           </div>
 
           {/* Live Buffer */}
